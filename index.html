@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Prime Factor Tree</title>
+	</head>
+	<body>
+		<header>
+			<h1>Prime Factorization Tree</h1>
+			<menu>
+				<input
+					type="number"
+					value="18"
+					min="1"
+					step="1"
+					aria-label="number to factorize"
+				/>
+			</menu>
+		</header>
+
+		<main>
+			<div id="factors"></div>
+			<canvas></canvas>
+		</main>
+
+		<script type="module" src="/src/main.ts"></script>
+	</body>
+</html>
