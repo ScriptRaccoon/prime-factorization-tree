@@ -4,7 +4,7 @@ import pf from "primes-and-factors";
 const canvas = document.querySelector("canvas")!;
 const ctx = canvas.getContext("2d")!;
 
-const numberInput = document.querySelector(
+const number_input = document.querySelector(
 	"input"
 ) as HTMLInputElement;
 
@@ -63,7 +63,7 @@ function recursive_draw_binary_tree(
 }
 
 function init() {
-	numberInput.addEventListener("change", update_number);
+	number_input.addEventListener("change", update_number);
 	adjust_canvas();
 	window.addEventListener("resize", adjust_canvas);
 	update_number();
@@ -72,7 +72,7 @@ function init() {
 init();
 
 function update_number() {
-	const number = numberInput.valueAsNumber;
+	const number = number_input.valueAsNumber;
 	if (number >= 2) {
 		draw_binary_tree(number);
 	} else {
