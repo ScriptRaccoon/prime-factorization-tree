@@ -35,7 +35,6 @@ function recursive_draw_binary_tree(
 	if (array.length == 0) return;
 
 	const [factor, ...rest] = array;
-	7;
 
 	const width = (x_max - x_min) / factor;
 
