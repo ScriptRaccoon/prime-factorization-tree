@@ -76,7 +76,7 @@ function update_number() {
 	if (number >= 2) {
 		draw_binary_tree(number);
 	} else {
-		window.alert("Only numbers >= 2 are not allowed");
+		window.alert("Only numbers >= 2 are allowed");
 	}
 }
 
