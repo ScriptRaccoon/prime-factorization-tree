@@ -1,3 +1,5 @@
+/* global styles */
+
 * {
 	margin: 0;
 	padding: 0;
@@ -13,27 +15,34 @@ body {
 	align-items: center;
 }
 
+/* header */
+
+header {
+	padding-block: 1rem;
+}
+
+h1 {
+	font-weight: unset;
+	font-size: 1.5rem;
+}
+
+/* input */
+
 input {
 	font-size: inherit;
 	font-family: inherit;
 	color: inherit;
 	background-color: inherit;
 	border: none;
-	outline: 0.1rem solid #222;
-	width: 5rem;
+	outline: 0.1rem solid #555;
+	width: 3rem;
 	text-align: center;
-	padding: 0.5rem;
+	padding: 0.2rem;
 	appearance: textfield;
 }
 
 input:focus {
 	outline-color: white;
-}
-
-#factors {
-	font-size: 1.2rem;
-	text-align: center;
-	padding-block: 1.5rem 1rem;
 }
 
 input::-webkit-outer-spin-button,
@@ -42,14 +51,10 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
-header {
-	display: flex;
-	align-self: flex-start;
-	gap: 1rem;
-	padding: 0.5rem;
-}
+/* factors */
 
-h1 {
-	font-weight: unset;
-	font-size: 1.5rem;
+#factors {
+	font-size: 1.2rem;
+	text-align: center;
+	padding-block: 1.5rem;
 }

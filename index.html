@@ -7,12 +7,17 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
-		<title>Prime Factor Tree</title>
+		<title>Prime Factorization Tree</title>
 	</head>
 	<body>
 		<header>
 			<h1>Prime Factorization Tree</h1>
-			<menu>
+		</header>
+
+		<menu>
+			<label
+				>Number:
+
 				<input
 					type="number"
 					value="18"
@@ -20,12 +25,15 @@
 					step="1"
 					aria-label="number to factorize"
 				/>
-			</menu>
-		</header>
+			</label>
+		</menu>
 
 		<main>
 			<div id="factors"></div>
-			<canvas></canvas>
+			<canvas
+				role="img"
+				aria-label="prime factorization tree of the given number"
+			></canvas>
 		</main>
 
 		<script type="module" src="/src/main.ts"></script>
