@@ -10,7 +10,7 @@ const factors_element = document.getElementById("factors")!;
 function draw_tree(n: number) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	const factors = pf.getFactors(n);
-	factors_element.innerHTML = `${n} = ${factors.join(" &times; ")}`;
+	factors_element.innerHTML = "= " + factors.join(" &times; ");
 	const threshold = 5;
 	const step = (canvas.height - 2 * threshold) / factors.length;
 	recursive_draw_tree(
@@ -48,11 +48,10 @@ function recursive_draw_tree(
 
 function update_number() {
 	const number = input.valueAsNumber;
-	if (number >= 2) {
+	if (number >= 2 && number == Math.floor(number)) {
 		draw_tree(number);
 	} else {
-		factors_element.innerHTML =
-			"Only numbers &geq; 2 are allowed";
+		window.alert("Only whole numbers > 1 are allowed");
 	}
 }
 
