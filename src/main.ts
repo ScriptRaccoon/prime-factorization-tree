@@ -4,79 +4,55 @@ import pf from "primes-and-factors";
 const canvas = document.querySelector("canvas")!;
 const ctx = canvas.getContext("2d")!;
 
-const number_input = document.querySelector(
-	"input"
-) as HTMLInputElement;
-
+const input = document.querySelector("input")!;
 const factors_element = document.getElementById("factors")!;
 
-function draw_binary_tree(n: number) {
+function draw_tree(n: number) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	const factors = pf.getFactors(n);
-	factors_element.innerHTML = n + " = " + factors.join(" &times; ");
-	recursive_draw_binary_tree(
+	factors_element.innerHTML = `${n} = ${factors.join(" &times; ")}`;
+	const threshold = 5;
+	const step = (canvas.height - 2 * threshold) / factors.length;
+	recursive_draw_tree(
 		factors,
-		canvas.width / 2,
-		5,
-		0,
-		canvas.width,
-		factors.length
+		[canvas.width / 2, threshold],
+		[0, canvas.width],
+		step
 	);
 }
 
-function recursive_draw_binary_tree(
+function recursive_draw_tree(
 	array: number[],
-	x: number,
-	y: number,
-	x_min: number,
-	x_max: number,
-	factor_amount: number
+	pos: [number, number],
+	region: [number, number],
+	step: number
 ): void {
 	if (array.length == 0) return;
-
-	const [factor, ...rest] = array;
-
-	const width = (x_max - x_min) / factor;
-
-	for (let i = 0; i < factor; i++) {
-		const x_min_new = x_min + i * width;
-		const x_max_new = x_min + (i + 1) * width;
-
-		const x_new = (x_min_new + x_max_new) / 2;
-		const y_new = y + (canvas.height - 10) / factor_amount;
-
+	const [first, ...rest] = array;
+	const [_, y] = pos;
+	const [a, b] = region;
+	const width = (b - a) / first;
+	for (let i = 0; i < first; i++) {
+		const c = a + i * width;
+		const d = c + width;
+		const next_region: [number, number] = [c, d];
+		const target: [number, number] = [(c + d) / 2, y + step];
 		ctx.beginPath();
-		ctx.moveTo(x, y);
-		ctx.lineTo(x_new, y_new);
+		ctx.moveTo(...pos);
+		ctx.lineTo(...target);
 		ctx.stroke();
 		ctx.closePath();
-
-		recursive_draw_binary_tree(
-			rest,
-			x_new,
-			y_new,
-			x_min_new,
-			x_max_new,
-			factor_amount
-		);
+		recursive_draw_tree(rest, target, next_region, step);
 	}
 }
 
-function init() {
-	number_input.addEventListener("change", update_number);
-	adjust_canvas();
-	window.addEventListener("resize", adjust_canvas);
-	update_number();
-}
-
-init();
-
 function update_number() {
-	const number = number_input.valueAsNumber;
+	const number = input.valueAsNumber;
 	if (number >= 2) {
-		draw_binary_tree(number);
+		draw_tree(number);
 	} else {
-		window.alert("Only numbers >= 2 are allowed");
+		factors_element.innerHTML =
+			"Only numbers &geq; 2 are allowed";
 	}
 }
 
@@ -88,3 +64,12 @@ function adjust_canvas() {
 	ctx.lineWidth = 2;
 	ctx.lineCap = "round";
 }
+
+function init() {
+	adjust_canvas();
+	update_number();
+	window.addEventListener("resize", adjust_canvas);
+	input.addEventListener("change", update_number);
+}
+
+init();
